@@ -17,23 +17,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "devboost.SpecFlowTest", "de
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gestao de Pagamentos", "Gestao de Pagamentos", "{22E49180-BB74-4BE2-A3A3-32903844894D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Pay", "GestaoPagamento\Domain.Pay\Domain.Pay.csproj", "{D2193D0B-5203-45E6-B833-59082ABA2C06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Pay", "GestaoPagamento\Domain.Pay\Domain.Pay.csproj", "{D2193D0B-5203-45E6-B833-59082ABA2C06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Pay.Services", "GestaoPagamento\Domain.Pay.Services\Domain.Pay.Services.csproj", "{F7D185FA-339D-4634-85F0-8AA06F0D7A90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Pay.Services", "GestaoPagamento\Domain.Pay.Services\Domain.Pay.Services.csproj", "{F7D185FA-339D-4634-85F0-8AA06F0D7A90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Pay.TDD", "GestaoPagamento\Tests.Pay.TDD\Tests.Pay.TDD.csproj", "{C7ABB34F-0F7F-4DAA-9B4E-672DDCD63C77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Pay.TDD", "GestaoPagamento\Tests.Pay.TDD\Tests.Pay.TDD.csproj", "{C7ABB34F-0F7F-4DAA-9B4E-672DDCD63C77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Pay.BDD", "GestaoPagamento\Tests.Pay.BDD\Tests.Pay.BDD.csproj", "{366DA49D-D7AA-4BB9-9B6C-68F989EFD375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Pay.BDD", "GestaoPagamento\Tests.Pay.BDD\Tests.Pay.BDD.csproj", "{366DA49D-D7AA-4BB9-9B6C-68F989EFD375}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{E55D9266-1526-4AB6-8FE6-113F0ABE64AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Pay", "GestaoPagamento\Repository.Pay\Repository.Pay.csproj", "{043D6EE7-08F0-408D-8883-8C820953383F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Pay", "GestaoPagamento\Repository.Pay\Repository.Pay.csproj", "{043D6EE7-08F0-408D-8883-8C820953383F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoC.Pay", "GestaoPagamento\IoC.Pay\IoC.Pay.csproj", "{18E9E384-5D01-46EA-B607-EACA254D06F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoC.Pay", "GestaoPagamento\IoC.Pay\IoC.Pay.csproj", "{18E9E384-5D01-46EA-B607-EACA254D06F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pay.API", "GestaoPagamento\Pay.API\Pay.API.csproj", "{119A40E8-1652-4BEB-AC56-360A03910A74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pay.API", "GestaoPagamento\Pay.API\Pay.API.csproj", "{119A40E8-1652-4BEB-AC56-360A03910A74}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Delivery", "Delivery", "{12F491BE-EE87-4BAC-93C0-FAE15452608F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Pay", "GestaoPagamento\Integration.Pay\Integration.Pay.csproj", "{5EF2F806-36CE-4822-885A-A5ED09E9F90C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{119A40E8-1652-4BEB-AC56-360A03910A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{119A40E8-1652-4BEB-AC56-360A03910A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{119A40E8-1652-4BEB-AC56-360A03910A74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EF2F806-36CE-4822-885A-A5ED09E9F90C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EF2F806-36CE-4822-885A-A5ED09E9F90C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EF2F806-36CE-4822-885A-A5ED09E9F90C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EF2F806-36CE-4822-885A-A5ED09E9F90C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +118,7 @@ Global
 		{043D6EE7-08F0-408D-8883-8C820953383F} = {E55D9266-1526-4AB6-8FE6-113F0ABE64AE}
 		{18E9E384-5D01-46EA-B607-EACA254D06F3} = {E55D9266-1526-4AB6-8FE6-113F0ABE64AE}
 		{119A40E8-1652-4BEB-AC56-360A03910A74} = {22E49180-BB74-4BE2-A3A3-32903844894D}
+		{5EF2F806-36CE-4822-885A-A5ED09E9F90C} = {E55D9266-1526-4AB6-8FE6-113F0ABE64AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08345D69-ACBC-44EC-BF93-542673AD566F}
