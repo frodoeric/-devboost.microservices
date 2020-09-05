@@ -21,11 +21,11 @@ namespace Domain.Pay.Entities
 
         public double Valor { get; }
 
-        public string Status { get; }
+        public int Status { get; }
 
         protected Payment() { }
 
-        private Payment(DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, string status)
+        private Payment(DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
         {
             CreatedAt = createdAt;
             Name = name;
@@ -37,7 +37,7 @@ namespace Domain.Pay.Entities
             Status = status;
         }
 
-        public static Payment Criar(DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, string status)
+        public static Payment Criar(DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
         {
             return new Payment(createdAt, name, bandeira, numeroCartao, vencimento, codigoSeguranca, valor, status);
         }
