@@ -1,10 +1,9 @@
-﻿using Domain.Pay.Core;
-using System;
+﻿using System;
 
-namespace Domain.Pay.Entities
+namespace Domain.Pay.Services.Dtos.Payments
 {
-    public class Payment : Entity
-    {      
+    public class PaymentDto
+    {
         public DateTime CreatedAt { get; private set; }
 
         public string Name { get; private set; }
