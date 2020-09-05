@@ -50,6 +50,8 @@ namespace devboost.dronedelivery
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IPagamentoRepository, PagamentoCartaoRepository>();
 
+            services.AddHttpClient<IPayAPIHandler, PayAPIHandler>();
+
             services.AddScoped<ITokenHandler, TokenHandler>();
             services.AddScoped<ILoginHandler, LoginHandler>();
             services.AddScoped<IUserHandler, UserHandler>();
