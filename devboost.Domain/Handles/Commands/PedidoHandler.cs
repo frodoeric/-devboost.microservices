@@ -51,6 +51,9 @@ namespace devboost.Domain.Handles.Commands
                 PagamentoCartao = pagamento
             };
             await _pedidoRepository.AddPedido(pedido);
+            //Todo: Montar Envio para EndPoint API Pagamento
+
+
             return pedido;
         }
 
@@ -85,6 +88,11 @@ namespace devboost.Domain.Handles.Commands
                     }
                 }
             }
+        }
+
+        public async Task AtualizaStatusPagamento(PagamentoCartao pagamento)
+        {
+            throw new Exception("Implementar");
         }
     }
 }
