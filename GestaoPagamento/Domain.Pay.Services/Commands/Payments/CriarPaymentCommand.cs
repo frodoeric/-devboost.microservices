@@ -4,6 +4,8 @@ namespace Domain.Pay.Services.Commands.Payments
 {
     public class CriarPaymentCommand
     {
+        public Guid PayId { get; }
+
         public DateTime CreatedAt { get; }
 
         public string Name { get; private set; }
