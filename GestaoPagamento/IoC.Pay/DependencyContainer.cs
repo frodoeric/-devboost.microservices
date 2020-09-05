@@ -16,6 +16,8 @@ namespace IoC.Pay
             services.AddDbContext<PaymentDbContext>(options =>
                     options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<IPaymentDbContext, PaymentDbContext>(ServiceLifetime.Scoped);
         }
     }
 }
