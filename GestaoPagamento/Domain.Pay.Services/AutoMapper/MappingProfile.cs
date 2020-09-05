@@ -9,7 +9,8 @@ namespace Domain.Pay.Services.AutoMapper
         public MappingProfile()
         {
             //Command
-            CreateMap<CriarPaymentCommand, Payment>().ConstructUsing(c => Payment.Criar(c.CreatedAt, c.Name, c.Bandeira, c.NumeroCartao, c.Vencimento, c.CodigoSeguranca, c.Valor, c.Status));
+            CreateMap<CriarPaymentCommand, Payment>()
+                .ConstructUsing(c => Payment.Criar(c.PayId, c.CreatedAt, c.Name, c.Bandeira, c.NumeroCartao, c.Vencimento, c.CodigoSeguranca, c.Valor, c.Status));
         }
     }
 }

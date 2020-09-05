@@ -25,8 +25,9 @@ namespace Domain.Pay.Entities
 
         protected Payment() { }
 
-        private Payment(DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
+        private Payment(Guid payId, DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
         {
+            PayId = payId;
             CreatedAt = createdAt;
             Name = name;
             Bandeira = bandeira;
@@ -37,9 +38,9 @@ namespace Domain.Pay.Entities
             Status = status;
         }
 
-        public static Payment Criar(DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
+        public static Payment Criar(Guid payId, DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
         {
-            return new Payment(createdAt, name, bandeira, numeroCartao, vencimento, codigoSeguranca, valor, status);
+            return new Payment(payId, createdAt, name, bandeira, numeroCartao, vencimento, codigoSeguranca, valor, status);
         }
     }
 }
