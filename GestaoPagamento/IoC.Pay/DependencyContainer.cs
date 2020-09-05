@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Repository.Pay;
 using Repository.Pay.Data;
 using System.Reflection;
 
@@ -18,6 +19,7 @@ namespace IoC.Pay
                     configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<IPaymentDbContext, PaymentDbContext>(ServiceLifetime.Scoped);
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         }
     }
 }
