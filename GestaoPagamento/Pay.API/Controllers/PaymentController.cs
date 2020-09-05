@@ -11,7 +11,7 @@ namespace Pay.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Payment(PaymentDto paymentDto)
         {
-
+            return Ok();
         }
     }
 }

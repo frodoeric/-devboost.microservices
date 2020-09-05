@@ -4,5 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Pay.Services\Domain.Pay.Services.csproj" />
+  </ItemGroup>
+
 
 </Project>

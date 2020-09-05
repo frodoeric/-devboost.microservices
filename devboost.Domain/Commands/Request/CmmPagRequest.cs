@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Domain.Pay.Services.Dtos.Payments
+namespace devboost.Domain
 {
-    public class PaymentDto
+    public class CmmPagRequest
     {
         public Guid PayId { get; set; }
         public DateTime CreatedAt { get; private set; }
@@ -20,5 +22,6 @@ namespace Domain.Pay.Services.Dtos.Payments
         public double Valor { get; private set; }
 
         public string Status { get; private set; }
+
     }
 }

@@ -5,8 +5,9 @@ using devboost.Domain.Handles.Commands.Interfaces;
 
 namespace devboost.Domain.Handles.Commands
 {
-    public class ClientePayAPI : IClientPayAPI
+    public class PayAPIHandler : IClientPayAPI
     {
+
 
     }
 }
