@@ -10,6 +10,7 @@ namespace Pay.API.Controllers
     public class PaymentController : ControllerBase
     {
         [HttpPost]
+        [Route("Pagamento")]
         public async Task<IActionResult> Payment(CriarPaymentCommand criarPaymentCommand)
         {
             return Ok();

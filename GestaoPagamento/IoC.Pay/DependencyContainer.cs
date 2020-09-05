@@ -2,7 +2,7 @@
 
 namespace IoC.Pay
 {
-    public class DependencyContainer
+    public static class DependencyContainer
     {
         public static void RegisterServices(IServiceCollection services)
         {
