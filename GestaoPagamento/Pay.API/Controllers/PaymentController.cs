@@ -8,6 +8,7 @@ namespace Pay.API.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
+        [HttpPost]
         public async Task<IActionResult> Payment(PaymentDto paymentDto)
         {
 
