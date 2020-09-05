@@ -4,6 +4,8 @@ namespace Domain.Pay.Services.Commands.Payments
 {
     public class CriarPaymentCommand
     {
+        public Guid PayId { get; }
+
         public DateTime CreatedAt { get; }
 
         public string Name { get; private set; }
@@ -20,9 +22,17 @@ namespace Domain.Pay.Services.Commands.Payments
 
         public string Status { get; }
 
-        public CriarPaymentCommand(DateTime createdAt, string name, string bandeira)
+        
+        public CriarPaymentCommand(DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, string status)
         {
-
+            CreatedAt = createdAt;
+            Name = name;
+            Bandeira = bandeira;
+            NumeroCartao = numeroCartao;
+            Vencimento = vencimento;
+            CodigoSeguranca = codigoSeguranca;
+            Valor = valor;
+            Status = status;
         }
     }
 }

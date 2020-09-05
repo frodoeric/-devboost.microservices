@@ -4,7 +4,7 @@ using System.Text;
 
 namespace devboost.Domain.Handles.Commands.Interfaces
 {
-    public interface IClientPayAPI
+    public interface IPayAPIHandler
     {
 
 
