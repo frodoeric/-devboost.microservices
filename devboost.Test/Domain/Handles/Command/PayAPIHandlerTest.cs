@@ -1,5 +1,6 @@
 ﻿using devboost.Domain;
 using devboost.Domain.Commands.Request;
+using devboost.Domain.Handles.Commands;
 using devboost.Domain.Handles.Commands.Interfaces;
 using devboost.Domain.Model;
 using devboost.Test.Config;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using Xunit;
 
 namespace devboost.Test.Domain.Handles.Command
@@ -14,10 +16,12 @@ namespace devboost.Test.Domain.Handles.Command
     public class PayAPIHandlerTest
     {
         private readonly IPayAPIHandler payAPIHandler;
+        private readonly HttpClient httpClient;
 
-        public PayAPIHandlerTest(IPayAPIHandler payAPIHandler)
+        public PayAPIHandlerTest()
         {
-            this.payAPIHandler = payAPIHandler;
+            this.payAPIHandler = new PayAPIHandler(httpClient);
+            this.httpClient = new HttpClient();
         }
 
         [Fact]
