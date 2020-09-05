@@ -40,6 +40,7 @@ namespace devboost.Test.Config
             _services.AddScoped<IDroneRepository, DroneRepository>();
             _services.AddScoped<IUserRepository, UserRepository>();
             _services.AddScoped<IClienteRepository, ClienteRepository>();
+            _services.AddScoped<IPagamentoRepository, PagamentoCartaoRepository>();
 
             _services.AddScoped<ITokenHandler, TokenHandler>();
             _services.AddScoped<ILoginHandler, LoginHandler>();

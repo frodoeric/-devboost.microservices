@@ -38,6 +38,9 @@ namespace devboost.Domain.Model
         public Guid ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
+        public Guid PagamentoCartaoId { get; set; }
+        public PagamentoCartao PagamentoCartao { get; set; }
+
         public List<PedidoDrone> PedidosDrones { get; set; } = new List<PedidoDrone>();
     }
 

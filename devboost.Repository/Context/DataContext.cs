@@ -15,6 +15,7 @@ namespace devboost.Repository.Context
         public DbSet<PedidoDrone> PedidoDrone { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<PagamentoCartao> PagamentoCartao { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -23,6 +24,7 @@ namespace devboost.Repository.Context
             PedidoDroneModel(builder);
             UserModel(builder);
             ClienteModel(builder);
+            PagamentoCartaoModel(builder);
         }
 
         void DroneModel(ModelBuilder builder)
@@ -43,9 +45,18 @@ namespace devboost.Repository.Context
                 .HasColumnName("Client_Id");
 
             builder.Entity<Pedido>()
+                .Property(x => x.PagamentoCartaoId)
+                .HasColumnName("PagtoCartao_Id");
+
+            builder.Entity<Pedido>()
                 .HasOne(x => x.Cliente)
                 .WithMany(x => x.Pedidos)
                 .HasForeignKey(x => x.ClienteId);
+
+            builder.Entity<Pedido>()
+                .HasOne(x => x.PagamentoCartao)
+                .WithMany(x => x.Pedidos)
+                .HasForeignKey(x => x.PagamentoCartaoId);
         }
 
         void PedidoDroneModel(ModelBuilder builder)
@@ -136,6 +147,38 @@ namespace devboost.Repository.Context
             builder.Entity<Cliente>()
                 .HasOne(x => x.User)
                 .WithOne(x => x.Cliente);
+        }
+
+        void PagamentoCartaoModel(ModelBuilder builder)
+        {
+            builder.Entity<PagamentoCartao>().ToTable("PagamentoCartao");
+
+            builder.Entity<PagamentoCartao>()
+                .HasKey(x => x.Id);
+
+            builder.Entity<PagamentoCartao>()
+                .Property(x => x.Bandeira)
+                .HasColumnName("Bandeira");
+
+            builder.Entity<PagamentoCartao>()
+                .Property(x => x.Numero)
+                .HasColumnName("Numero");
+
+            builder.Entity<PagamentoCartao>()
+                .Property(x => x.Vencimento)
+                .HasColumnName("Vencimento");
+
+            builder.Entity<PagamentoCartao>()
+                .Property(x => x.CodigoSeguranca)
+                .HasColumnName("CodigoSeguranca");
+
+            builder.Entity<PagamentoCartao>()
+                .Property(x => x.Valor)
+                .HasColumnName("Valor");
+
+            builder.Entity<PagamentoCartao>()
+                .Property(x => x.Status)
+                .HasColumnName("Status");
         }
     }
 }

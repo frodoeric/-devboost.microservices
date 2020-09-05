@@ -9,6 +9,37 @@ GO
 USE [DroneDelivery]
 GO
 
+-- Remove as tabelas caso existam
+------------------------------------------------------------------------------------------------
+
+IF OBJECT_ID('Pedido_Drone') IS NOT NULL
+    DROP TABLE [Pedido_Drone]
+GO
+
+IF OBJECT_ID('Pedido') IS NOT NULL
+    DROP TABLE [Pedido]
+GO
+
+IF OBJECT_ID('PagamentoCartao') IS NOT NULL
+    DROP TABLE [PagamentoCartao]
+GO
+
+IF OBJECT_ID('Drone') IS NOT NULL
+    DROP TABLE [Drone]
+GO
+
+IF OBJECT_ID('Cliente') IS NOT NULL
+    DROP TABLE [Cliente]
+GO
+
+IF OBJECT_ID('Usuario') IS NOT NULL
+    DROP TABLE [Usuario]
+GO
+
+
+-- Cria as tabelas novamente
+------------------------------------------------------------------------------------------------
+
 CREATE TABLE [Usuario] (
     [ID] [uniqueidentifier] NOT NULL,
     [Nome] varchar(255) NOT NULL unique,
@@ -35,10 +66,6 @@ GO
 ALTER TABLE [dbo].[Cliente] CHECK CONSTRAINT [FK_Cliente_Usuario]
 GO
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE TABLE [dbo].[Drone](
 	[Id] [int] NOT NULL,
 	[Capacidade] [int] NOT NULL,
@@ -53,14 +80,25 @@ CREATE TABLE [dbo].[Drone](
 ) ON [PRIMARY]
 GO
 
-/****** Object:  Table [dbo].[Pedido]    Script Date: 22/08/2020 00:33:11 ******/
-SET ANSI_NULLS ON
+CREATE TABLE [dbo].[PagamentoCartao](
+	[Id] [uniqueidentifier] NOT NULL,
+    [Bandeira] varchar(80) NOT NULL,
+    [Numero] varchar(30) NOT NULL,
+	[Vencimento] [datetime] NOT NULL,
+    [CodigoSeguranca] [int] NOT NULL,
+	[Valor] numeric(10,2) NOT NULL,
+    [Status] [int] NOT NULL
+ CONSTRAINT [PK_PagamentoCartao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Pedido](
 	[Id] [uniqueidentifier] NOT NULL,
     [Client_Id] [uniqueidentifier] NOT NULL,
+    [PagtoCartao_Id] [uniqueidentifier],
 	[Peso] [int] NOT NULL,
 	[DataHora] [datetime] NOT NULL,
     [DistanciaParaOrigem] [float] NOT NULL,
@@ -76,12 +114,12 @@ REFERENCES [dbo].[Cliente]([Id])
 GO
 ALTER TABLE [dbo].[Pedido] CHECK CONSTRAINT [FK_Pedido_Cliente]
 GO
+ALTER TABLE [dbo].[Pedido]  WITH CHECK ADD CONSTRAINT [FK_Pedido_PagtoCartao] FOREIGN KEY([PagtoCartao_Id])
+REFERENCES [dbo].[PagamentoCartao]([Id])
+GO
+ALTER TABLE [dbo].[Pedido] CHECK CONSTRAINT [FK_Pedido_PagtoCartao]
+GO
 
-/****** Object:  Table [dbo].[Pedido_Drone]    Script Date: 22/08/2020 00:33:11 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE TABLE [dbo].[Pedido_Drone](
 	[Pedido_Id] [uniqueidentifier] NOT NULL,
 	[Drone_Id] [int] NOT NULL
@@ -101,6 +139,9 @@ REFERENCES [dbo].[Drone] ([Id])
 GO
 ALTER TABLE [dbo].[Pedido_Drone] CHECK CONSTRAINT [FK_Pedido_Drone_Drone]
 GO
+
+-- Popula dados iniciais
+------------------------------------------------------------------------------------------------
 
 INSERT INTO [Drone] ([Id], [Capacidade], [Velocidade], [Autonomia],	[Carga], [Status])
 VALUES

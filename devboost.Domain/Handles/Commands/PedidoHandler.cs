@@ -16,12 +16,14 @@ namespace devboost.Domain.Handles.Commands
         readonly IPedidoRepository _pedidoRepository;
         readonly IDroneRepository _droneRepository;
         readonly IClienteRepository _clienteRepository;
+        readonly IPagamentoRepository _pagamentoRepository;
 
-        public PedidoHandler(IPedidoRepository pedidoRepository, IDroneRepository droneRepository, IClienteRepository clienteRepository)
+        public PedidoHandler(IPedidoRepository pedidoRepository, IDroneRepository droneRepository, IClienteRepository clienteRepository, IPagamentoRepository pagamentoRepository)
         {
             _pedidoRepository = pedidoRepository;
             _droneRepository = droneRepository;
             _clienteRepository = clienteRepository;
+            _pagamentoRepository = pagamentoRepository;
         }
 
         public async Task<Pedido> RealizarPedido(RealizarPedidoRequest pedidoRequest, string userName)
@@ -30,6 +32,14 @@ namespace devboost.Domain.Handles.Commands
             if (cliente == null)
                 throw new Exception("Cliente não localizado");
             var distancia = GEOCalculaDistancia.CalculaDistanciaEmKM(new GEOParams(LATITUDE, LONGITUDE, cliente.Latitude, cliente.Longitude));
+            var pagamento = new PagamentoCartao(
+                pedidoRequest.Bandeira,
+                pedidoRequest.Numero,
+                pedidoRequest.Vencimento,
+                pedidoRequest.CodigoSeguranca,
+                pedidoRequest.Valor,
+                StatusCartao.aguardandoAprovacao
+            );
             var pedido = new Pedido
             {
                 Id = Guid.NewGuid(),
@@ -37,7 +47,8 @@ namespace devboost.Domain.Handles.Commands
                 DataHora = DateTime.Now,
                 Peso = pedidoRequest.Peso,
                 DistanciaParaOrigem = distancia,
-                StatusPedido = StatusPedido.aguardandoEntrega
+                StatusPedido = StatusPedido.aguardandoAprovacao,
+                PagamentoCartao = pagamento
             };
             await _pedidoRepository.AddPedido(pedido);
             return pedido;

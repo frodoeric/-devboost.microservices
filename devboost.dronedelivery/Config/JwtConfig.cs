@@ -27,7 +27,7 @@ namespace devboost.dronedelivery.Config
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(configuration["jwt:key"])
+                        Encoding.ASCII.GetBytes(configuration["jwt:key"])
                     ),
                     ClockSkew = TimeSpan.Zero
                 };

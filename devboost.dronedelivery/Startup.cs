@@ -37,6 +37,9 @@ namespace devboost.dronedelivery
             //Registra Authentication por JWT
             services.AddJwtconfiguration(Configuration);
 
+            //Registra o Swagger gerador, definindo 1 ou mais Swaggers documentos
+            services.AddSwaggerconfiguration(Configuration);
+
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -45,6 +48,7 @@ namespace devboost.dronedelivery
             services.AddScoped<IDroneRepository, DroneRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IPagamentoRepository, PagamentoCartaoRepository>();
 
             services.AddScoped<ITokenHandler, TokenHandler>();
             services.AddScoped<ILoginHandler, LoginHandler>();
@@ -68,6 +72,8 @@ namespace devboost.dronedelivery
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwaggerConfiguration(Configuration);
 
             app.UseHttpsRedirection();
 
