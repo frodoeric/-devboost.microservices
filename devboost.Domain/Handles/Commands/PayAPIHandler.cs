@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using devboost.Domain.Commands.Request;
 using devboost.Domain.Handles.Commands.Interfaces;
+using devboost.Domain.Model;
 using Newtonsoft.Json;
 
 namespace devboost.Domain.Handles.Commands
@@ -19,7 +20,7 @@ namespace devboost.Domain.Handles.Commands
             this.httpClient = httpClient;
         }
 
-        public async Task<HttpResponseMessage> PostRealizarPagamento()
+        public async Task<HttpResponseMessage> PostRealizarPagamento(CmmPagRequest pagamento)
         {
             CmmPagRequest realizarPagamentoRequest = new CmmPagRequest();
 

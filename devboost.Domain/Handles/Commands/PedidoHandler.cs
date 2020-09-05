@@ -55,7 +55,7 @@ namespace devboost.Domain.Handles.Commands
             await _pedidoRepository.AddPedido(pedido);
             //Todo: Montar Envio para EndPoint API Pagamento
 
-            //_payAPIHandler.PostRealizarPagamento(Pagamento)
+            // _payAPIHandler.PostRealizarPagamento(pagamento);
 
 
             return pedido;
