@@ -20,10 +20,10 @@ namespace Domain.Pay.Services.Commands.Payments
 
         public double Valor { get; }
 
-        public string Status { get; }
+        public int Status { get; }
 
         
-        public CriarPaymentCommand(DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, string status)
+        public CriarPaymentCommand(DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
         {
             CreatedAt = createdAt;
             Name = name;
