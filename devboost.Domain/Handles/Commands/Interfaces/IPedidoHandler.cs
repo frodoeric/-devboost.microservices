@@ -8,5 +8,6 @@ namespace devboost.Domain.Handles.Commands.Interfaces
     {
         Task<Pedido> RealizarPedido(RealizarPedidoRequest pedidoRequest, string userName);
         Task DistribuirPedido();
+        Task AtualizaStatusPagamento(PagamentoCartao pagamento);
     }
 }

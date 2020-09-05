@@ -92,7 +92,21 @@ namespace devboost.Domain.Handles.Commands
 
         public async Task AtualizaStatusPagamento(PagamentoCartao pagamento)
         {
-            throw new Exception("Implementar");
+            // Atualiza o pagamento, caso encontre na base
+            var pagto = (PagamentoCartao)_pagamentoRepository.GetById(pagamento.Id).Result;
+            if (pagto == null)
+                throw new Exception("Pagamento não localizado");
+            // Atualiza status do pedido, conforme o status do pagamento foi retornado
+            var pedido = await _pedidoRepository.GetPedidoByPagamento(pagto.Id);
+            if (pedido == null)
+                throw new Exception("Pedido não localizado para o pagamento");
+            // Ajusta o status do pedido
+            pedido.StatusPedido = pagto.Status == StatusCartao.aprovado
+                ? StatusPedido.aguardandoEntrega
+                : StatusPedido.reprovado;
+            // Atualiza pagamento e pedido
+            await _pagamentoRepository.UpdatePagamento(pagamento);
+            await _pedidoRepository.UpdatePedido(pedido);
         }
     }
 }
