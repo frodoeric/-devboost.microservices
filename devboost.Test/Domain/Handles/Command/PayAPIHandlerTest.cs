@@ -20,8 +20,11 @@ namespace devboost.Test.Domain.Handles.Command
 
         public PayAPIHandlerTest()
         {
-            this.payAPIHandler = new PayAPIHandler(httpClient);
+            //this.payAPIHandler = new PayAPIHandler(httpClient);
             this.httpClient = new HttpClient();
+
+            var _serviceProvider = new StartInjection().ServiceProvider;
+            this.payAPIHandler = _serviceProvider.GetService<IPayAPIHandler>();
         }
 
         [Fact]

@@ -22,12 +22,22 @@ namespace devboost.Domain.Handles.Commands
 
         public async Task<HttpResponseMessage> PostRealizarPagamento(CmmPagRequest pagamento)
         {
-            CmmPagRequest realizarPagamentoRequest = new CmmPagRequest();
+            try
+            {
+                StringContent pedidoJson = new StringContent(JsonConvert.SerializeObject(pagamento));
 
-            StringContent pedidoJson = new StringContent(JsonConvert.SerializeObject(realizarPagamentoRequest));
+                var result = await httpClient.PostAsync(uri, pedidoJson);
+                return result;
 
-            var result = await httpClient.PostAsync(uri, pedidoJson);
-            return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            // CmmPagRequest realizarPagamentoRequest = new CmmPagRequest();
+
+            
         }
 
     }

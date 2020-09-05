@@ -37,6 +37,7 @@ namespace devboost.Test.Config
             _services.AddScoped<IUserRepository, UserRepository>();
             _services.AddScoped<IClienteRepository, ClienteRepository>();
             _services.AddScoped<IPagamentoRepository, PagamentoCartaoRepository>();
+            _services.AddScoped<IPayAPIHandler, PayAPIHandler>();
 
             _services.AddScoped<ITokenHandler, TokenHandler>();
             _services.AddScoped<ILoginHandler, LoginHandler>();
@@ -48,6 +49,8 @@ namespace devboost.Test.Config
             _services.AddScoped<IDroneHandler, DroneHandler>();
 
             _services.AddScoped<IDataStart, DataStart>();
+
+            _services.AddHttpClient<IPayAPIHandler, PayAPIHandler>();
 
             // Constroe o Provider
             ServiceProvider = _services.BuildServiceProvider();
