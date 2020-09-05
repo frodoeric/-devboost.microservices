@@ -2,6 +2,7 @@
 using devboost.Domain.Repository;
 using devboost.Repository.Context;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,11 @@ namespace devboost.Repository
         public PedidoRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
+        }
+
+        public async Task<Pedido> GetPedidoByPagamento(Guid pagamentoId)
+        {
+            return await _dataContext.Pedido.FirstOrDefaultAsync(x => x.PagamentoCartaoId == pagamentoId);
         }
 
         public async Task<List<Pedido>> GetPedidos(StatusPedido statusPedido)
