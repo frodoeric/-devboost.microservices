@@ -80,6 +80,24 @@ CREATE TABLE [dbo].[Drone](
 ) ON [PRIMARY]
 GO
 
+CREATE TABLE [dbo].[Payment](
+	[Id] [uniqueidentifier] NOT NULL,
+	[PayId] [uniqueidentifier] NOT NULL,
+	[CreatedAt] [datetime] NOT NULL,
+	[Nome] [nchar](140) NOT NULL,
+	[Bandeira] [nchar](30) NOT NULL,
+	[NumeroCartao] [nchar](16) NOT NULL,
+	[Vencimento] [datetime] NOT NULL,
+	[CodigoSeguranca] [int] NOT NULL,
+	[Valor] [numeric](10, 2) NOT NULL,
+	[Status] [int] NOT NULL,
+ CONSTRAINT [PK_Payment] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
 CREATE TABLE [dbo].[PagamentoCartao](
 	[Id] [uniqueidentifier] NOT NULL,
     [Bandeira] varchar(80) NOT NULL,
