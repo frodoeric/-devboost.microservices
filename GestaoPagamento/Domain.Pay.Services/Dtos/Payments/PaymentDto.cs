@@ -4,7 +4,8 @@ namespace Domain.Pay.Services.Dtos.Payments
 {
     public class PaymentDto
     {
-        public Guid PayId { get; set; }
+        public Guid PayId { get; private set; }
+
         public DateTime CreatedAt { get; private set; }
 
         public string Name { get; private set; }
