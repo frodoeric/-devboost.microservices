@@ -20,6 +20,9 @@
 
   <ItemGroup>
     <Folder Include="Drivers\" />
+    <Folder Include="Features\Respository\" />
+    <Folder Include="Features\Controller\" />
+    <Folder Include="Features\Command\" />
     <Folder Include="Hooks\" />
   </ItemGroup>
 
