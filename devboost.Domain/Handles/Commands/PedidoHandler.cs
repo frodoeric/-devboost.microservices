@@ -17,13 +17,15 @@ namespace devboost.Domain.Handles.Commands
         readonly IDroneRepository _droneRepository;
         readonly IClienteRepository _clienteRepository;
         readonly IPagamentoRepository _pagamentoRepository;
+        readonly IPayAPIHandler _payAPIHandler;
 
-        public PedidoHandler(IPedidoRepository pedidoRepository, IDroneRepository droneRepository, IClienteRepository clienteRepository, IPagamentoRepository pagamentoRepository)
+        public PedidoHandler(IPedidoRepository pedidoRepository, IDroneRepository droneRepository, IClienteRepository clienteRepository, IPagamentoRepository pagamentoRepository, IPayAPIHandler payAPIHandler)
         {
             _pedidoRepository = pedidoRepository;
             _droneRepository = droneRepository;
             _clienteRepository = clienteRepository;
             _pagamentoRepository = pagamentoRepository;
+            _payAPIHandler = payAPIHandler;
         }
 
         public async Task<Pedido> RealizarPedido(RealizarPedidoRequest pedidoRequest, string userName)
@@ -52,6 +54,8 @@ namespace devboost.Domain.Handles.Commands
             };
             await _pedidoRepository.AddPedido(pedido);
             //Todo: Montar Envio para EndPoint API Pagamento
+
+            // _payAPIHandler.PostRealizarPagamento(pagamento);
 
 
             return pedido;
