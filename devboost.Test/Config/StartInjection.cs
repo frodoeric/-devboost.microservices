@@ -29,10 +29,6 @@ namespace devboost.Test.Config
             IConfiguration configuration = StartConfiguration.Configuration;
             _services.AddSingleton(x => configuration);
 
-            //var builder = new DbContextOptionsBuilder<DataContext>()
-            //    .UseInMemoryDatabase(databaseName: "Test");
-            //_services.AddSingleton(x => new DataContext(builder.Options));
-
             _services.AddDbContext<DataContext>(options =>
                 options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()));
 
