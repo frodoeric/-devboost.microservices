@@ -2,7 +2,6 @@
 using devboost.Domain.Repository;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace devboost.Test.Warmup
 {
@@ -12,6 +11,7 @@ namespace devboost.Test.Warmup
         readonly IDroneRepository _droneRepository;
         readonly IUserRepository _userRepository;
         readonly IClienteRepository _clienteRepository;
+        readonly IPagamentoRepository _pagamentoRepository;
 
         readonly List<Drone> droneData = new List<Drone>()
         {
@@ -41,6 +41,12 @@ namespace devboost.Test.Warmup
             new Cliente("Iron Man", "iron.man@domain.com", "(11) 9999-9999", -23.5890684,-46.6584195),
         };
 
+        readonly List<PagamentoCartao> pagamentoData = new List<PagamentoCartao>()
+        {
+            new PagamentoCartao("VISA", "123456", DateTime.Now, 123, (decimal)459.54, StatusCartao.aguardandoAprovacao),
+            new PagamentoCartao("MASTERCARD", "45687", DateTime.Now, 453, (decimal)400.00, StatusCartao.aguardandoAprovacao)
+        };
+
         readonly List<Pedido> pedidoData = new List<Pedido>()
         {
             new Pedido() { Id = Guid.NewGuid(), Peso = 1, DataHora = DateTime.Now, DistanciaParaOrigem = 1, StatusPedido = StatusPedido.aguardandoEntrega },
@@ -50,12 +56,13 @@ namespace devboost.Test.Warmup
             new Pedido() { Id = Guid.NewGuid(), Peso = 2, DataHora = DateTime.Now, DistanciaParaOrigem = 3, StatusPedido = StatusPedido.aguardandoEntrega }
         };
 
-        public DataStart(IPedidoRepository pedidoRepository, IDroneRepository droneRepository, IUserRepository userRepository, IClienteRepository clienteRepository)
+        public DataStart(IPedidoRepository pedidoRepository, IDroneRepository droneRepository, IUserRepository userRepository, IClienteRepository clienteRepository, IPagamentoRepository pagamentoRepository)
         {
             _pedidoRepository = pedidoRepository;
             _droneRepository = droneRepository;
             _userRepository = userRepository;
             _clienteRepository = clienteRepository;
+            _pagamentoRepository = pagamentoRepository;
         }
 
         public void Seed()
@@ -63,6 +70,7 @@ namespace devboost.Test.Warmup
             AddDrone();
             AddUser();
             AddCliente();
+            AddPagamento();
             AddPedido();
         }
 
@@ -103,6 +111,16 @@ namespace devboost.Test.Warmup
             }
         }
 
+        void AddPagamento()
+        {
+            foreach (var pagamento in pagamentoData)
+            {
+                var p = _pagamentoRepository.GetById(pagamento.Id).Result;
+                if (p == null)
+                    _pagamentoRepository.AddPagamento(pagamento);
+            }
+        }
+
         void AddPedido()
         {
             foreach (var pedido in pedidoData)
@@ -111,7 +129,9 @@ namespace devboost.Test.Warmup
                 if (p.Count <= 5)
                 {
                     var cliente = clienteData[new Random().Next(0, 3)];
+                    var pagamento = pagamentoData[new Random().Next(0, 1)];
                     pedido.Cliente = _clienteRepository.GetByUserName(cliente.Nome).Result;
+                    pedido.PagamentoCartao = (PagamentoCartao)_pagamentoRepository.GetById(pagamento.Id).Result;
                     pedido.Id = Guid.NewGuid();
                     _pedidoRepository.AddPedido(pedido).Wait();
                 }

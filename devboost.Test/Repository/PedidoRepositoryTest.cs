@@ -23,6 +23,17 @@ namespace devboost.Test.Repository
         }
 
         [Fact]
+        public void GetPedidoByPagamento()
+        {
+            List<Pedido> lista = _pedidoRepository.GetPedidos(StatusPedido.aguardandoEntrega).Result;
+            foreach (var p in lista)
+            {
+                var pedido = _pedidoRepository.GetPedidoByPagamento(p.PagamentoCartaoId).Result;
+                Assert.NotNull(pedido);
+            }
+        }
+
+        [Fact]
         public void GetPedidos()
         {
             List<Pedido> lista = _pedidoRepository.GetPedidos(StatusPedido.aguardandoEntrega).Result;
