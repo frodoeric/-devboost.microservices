@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
+using Pay.API;
 
 namespace IoC.Pay
 {
@@ -6,7 +8,7 @@ namespace IoC.Pay
     {
         public static void RegisterServices(IServiceCollection services)
         {
-
+            services.AddAutoMapper(typeof(Startup));
         }
     }
 }
