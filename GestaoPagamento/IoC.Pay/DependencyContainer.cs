@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Domain.Pay.Services.CommandHandlers;
+using Domain.Pay.Services.CommandHandlers.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,8 @@ namespace IoC.Pay
 
             services.AddDbContext<IPaymentDbContext, PaymentDbContext>(ServiceLifetime.Scoped);
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+            services.AddScoped<ICriarPaymentHandler, CriarPaymentHandler>();
         }
     }
 }

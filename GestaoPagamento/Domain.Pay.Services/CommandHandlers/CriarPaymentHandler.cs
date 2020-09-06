@@ -2,6 +2,7 @@
 using Domain.Pay.Core;
 using Domain.Pay.Core.Validador;
 using Domain.Pay.Entities;
+using Domain.Pay.Services.CommandHandlers.Interfaces;
 using Domain.Pay.Services.Commands.Payments;
 using Repository.Pay.UnitOfWork;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Pay.Services.CommandHandlers
 {
-    public class CriarPaymentHandler : ValidadorResponse
+    public class CriarPaymentHandler : ValidadorResponse, ICriarPaymentHandler
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
