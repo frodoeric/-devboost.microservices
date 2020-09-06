@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository.Pay;
 using Repository.Pay.Data;
+using Repository.Pay.UnitOfWork;
 using System.Reflection;
 
 namespace IoC.Pay
@@ -22,6 +23,8 @@ namespace IoC.Pay
 
             services.AddDbContext<IPaymentDbContext, PaymentDbContext>(ServiceLifetime.Scoped);
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<ICriarPaymentHandler, CriarPaymentHandler>();
         }
