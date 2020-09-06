@@ -12,6 +12,17 @@ namespace Domain.Pay.Core
 
         public bool HasFails => _failureMessages.Any();
 
+        public object Data { get; private set; }
+
+        public ResponseResult(object @object) : this()
+        {
+            AddValue(@object);
+        }
+
+        public void AddValue(object @object)
+        {
+            Data = @object;
+        }
         public ResponseResult()
         {
             _failureMessages = new List<Notification>();

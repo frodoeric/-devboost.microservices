@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Domain.Pay.Services\Domain.Pay.Services.csproj" />
     <ProjectReference Include="..\IoC.Pay\IoC.Pay.csproj" />
   </ItemGroup>

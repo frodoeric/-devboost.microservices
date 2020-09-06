@@ -11,7 +11,7 @@ namespace Repository.Pay.Mappings
             builder.HasKey(u => u.Id);
             builder.Property(u => u.Id);
             builder.Property(u => u.Status);
-            builder.Property(u => u.Name).HasMaxLength(140);
+            builder.Property(u => u.Name).HasColumnName("Nome").HasMaxLength(140);
             builder.Property(u => u.NumeroCartao).HasMaxLength(16);
             builder.Property(u => u.PayId);
             builder.Property(u => u.Valor);
