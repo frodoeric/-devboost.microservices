@@ -9,4 +9,8 @@
     <Folder Include="Model\" />    
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Flunt" Version="1.0.5" />
+  </ItemGroup>
+
 </Project>

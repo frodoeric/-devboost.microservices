@@ -5,7 +5,7 @@ namespace Repository.Pay.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        IRepository<Payment> UserRepository { get; }
+        IRepository<Payment> PaymentRepository { get; }
 
         void Commit();
 

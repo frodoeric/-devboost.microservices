@@ -16,7 +16,7 @@ namespace Repository.Pay.UnitOfWork
             _paymentDbContext = paymentDbContext;
         }
 
-        public IRepository<Payment> UserRepository => _paymentRepository ??= _paymentRepository = new EfRepository<Payment>(_paymentDbContext);
+        public IRepository<Payment> PaymentRepository => _paymentRepository ??= _paymentRepository = new EfRepository<Payment>(_paymentDbContext);
 
         public void Commit()
         {
