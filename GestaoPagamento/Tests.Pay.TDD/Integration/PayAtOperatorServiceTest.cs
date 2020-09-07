@@ -22,7 +22,7 @@ namespace Tests.Pay.TDD.Integration
         {
             var result = _payAtOperatorService.ValidadePayAtOperator(new PayOperatorFilterDto()
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 CreatedAt = DateTime.Now,
                 Name = "Cornell Mayer",
                 Bandeira = "VISA",

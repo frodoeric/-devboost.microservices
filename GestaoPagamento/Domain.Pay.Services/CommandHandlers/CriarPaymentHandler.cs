@@ -6,9 +6,10 @@ using Domain.Pay.Services.CommandHandlers.Interfaces;
 using Domain.Pay.Services.Commands.Payments;
 using Integration.Pay.Dto;
 using Integration.Pay.Interfaces;
-using Newtonsoft.Json;
 using Repository.Pay.UnitOfWork;
+using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,27 +33,69 @@ namespace Domain.Pay.Services.CommandHandlers
 
         public async Task<ResponseResult> Handle(CriarPaymentCommand request)
         {
-            request.Validar();
+            // Registra a operação de pagamento
+            var result = await AddDataBase(request);
+            if (!result)
+                return _response;
+            // Chama MockAPI para tratar pagamento
+            await CallMockApi(request);
+            // Chama  WebHook retornando o status do pagamento
+            request.Status = 2;
+            await CallWebHook(request);
+            // retorna a operação para Controller
+            return _response;
+        }
 
+        async Task<bool> AddDataBase(CriarPaymentCommand request)
+        {
+            request.Validar();
             if (request.Notifications.Any())
             {
                 _response.AddNotifications(request.Notifications);
-                return _response;
+                return false;
             }
-
             // Armazena informação da transação de pagamento
             var payment = _mapper.Map<Payment>(request);
             await _unitOfWork.PaymentRepository.InsertAsync(payment);
             await _unitOfWork.CommitAsync();
+            return true;
+        }
 
-            // Chama MockAPI para tratar pagamento
-            await _payAtOperatorService.ValidadePayAtOperator(new PayOperatorFilterDto());
+        async Task CallMockApi(CriarPaymentCommand request)
+        {
+            await _payAtOperatorService.ValidadePayAtOperator(new PayOperatorFilterDto()
+            {
+                Id = request.PayId,
+                CreatedAt = DateTime.Now,
+                Name = request.Name,
+                Bandeira = request.Bandeira,
+                NumeroCartao = request.NumeroCartao,
+                Vencimento = request.Vencimento,
+                CodigoSeguranca = request.CodigoSeguranca,
+                Valor = (decimal)request.Valor,
+                Status = "Envio"
+            });
+        }
 
-            // Retorna para API cadastrada como WebHook
-            var jsonContent = new StringContent(JsonConvert.SerializeObject(payment), Encoding.UTF8, "application/json");
-            await _webHook.CallPostMethod(new PostMethodRequestDto("url", "method", jsonContent));
-
-            return _response;
+        async Task CallWebHook(CriarPaymentCommand request)
+        {
+            var result = await _webHook.CallPostMethod(new WebHookMethodRequestDto
+            {
+                PayId = request.PayId,
+                CreatedAt = request.CreatedAt,
+                Name = request.Name,
+                Bandeira = request.Bandeira,
+                NumeroCartao = request.NumeroCartao,
+                Vencimento = request.Vencimento,
+                CodigoSeguranca = request.CodigoSeguranca,
+                Valor = (decimal)request.Valor,
+                Status = request.Status
+            });
+            if (result.StatusCode != HttpStatusCode.OK)
+            {
+                request.AddNotification("", result.ContentResult);
+                _response.AddNotifications(request.Notifications);
+            }
         }
     }
 }

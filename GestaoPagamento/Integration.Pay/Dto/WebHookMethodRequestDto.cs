@@ -3,25 +3,25 @@ using System.Text.Json.Serialization;
 
 namespace Integration.Pay.Dto
 {
-    public class PayOperatorFilterDto
+    public class WebHookMethodRequestDto
     {
-        [JsonPropertyName("id")]
-        public Guid Id { get; set; }
+        [JsonPropertyName("payId")]
+        public Guid PayId { get; set; }
         [JsonPropertyName("createdAt")]
         public DateTime CreatedAt { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
-        [JsonPropertyName("Bandeira")]
+        [JsonPropertyName("bandeira")]
         public string Bandeira { get; set; }
-        [JsonPropertyName("NumeroCartao")]
+        [JsonPropertyName("numeroCartao")]
         public string NumeroCartao { get; set; }
-        [JsonPropertyName("Vencimento")]
+        [JsonPropertyName("vencimento")]
         public DateTime Vencimento { get; set; }
-        [JsonPropertyName("CodigoSeguranca")]
+        [JsonPropertyName("codigoSeguranca")]
         public int CodigoSeguranca { get; set; }
-        [JsonPropertyName("Valor")]
+        [JsonPropertyName("valor")]
         public decimal Valor { get; set; }
-        [JsonPropertyName("Status")]
-        public string Status { get; set; }
+        [JsonPropertyName("status")]
+        public int Status { get; set; }
     }
 }
