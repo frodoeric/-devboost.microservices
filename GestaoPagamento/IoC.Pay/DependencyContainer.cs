@@ -12,7 +12,6 @@ using Repository.Pay;
 using Repository.Pay.Data;
 using Repository.Pay.UnitOfWork;
 using System;
-using System.Reflection;
 
 namespace IoC.Pay
 {

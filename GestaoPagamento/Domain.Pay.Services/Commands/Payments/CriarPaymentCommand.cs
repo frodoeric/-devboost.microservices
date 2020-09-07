@@ -1,5 +1,6 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
+using Newtonsoft.Json;
 using System;
 
 namespace Domain.Pay.Services.Commands.Payments
@@ -16,18 +17,21 @@ namespace Domain.Pay.Services.Commands.Payments
         public double Valor { get; set; }
         public int Status { get; set; }
 
-        //public CriarPaymentCommand(Guid payId, DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
-        //{
-        //    PayId = payId;
-        //    CreatedAt = createdAt;
-        //    Name = name;
-        //    Bandeira = bandeira;
-        //    NumeroCartao = numeroCartao;
-        //    Vencimento = vencimento;
-        //    CodigoSeguranca = codigoSeguranca;
-        //    Valor = valor;
-        //    Status = status;
-        //}
+        [JsonConstructor]
+        public CriarPaymentCommand(Guid payId, DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
+        {
+            PayId = payId;
+            CreatedAt = createdAt;
+            Name = name;
+            Bandeira = bandeira;
+            NumeroCartao = numeroCartao;
+            Vencimento = vencimento;
+            CodigoSeguranca = codigoSeguranca;
+            Valor = valor;
+            Status = status;
+        }
+
+        public CriarPaymentCommand() { }
 
         public void Validar()
         {

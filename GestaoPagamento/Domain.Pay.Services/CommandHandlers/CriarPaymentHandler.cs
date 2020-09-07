@@ -55,10 +55,10 @@ namespace Domain.Pay.Services.CommandHandlers
                 return false;
             }
             // Armazena informação da transação de pagamento
-            //var payment = _mapper.Map<Payment>(request);
+            var payment = _mapper.Map<Payment>(request);
 
-            Payment payment = new Payment(request.PayId, DateTime.Now, request.Name, request.Bandeira, request.NumeroCartao, request.Vencimento,
-                request.CodigoSeguranca, request.Valor, request.Status);
+            //Payment payment = new Payment(request.PayId, DateTime.Now, request.Name, request.Bandeira, request.NumeroCartao, request.Vencimento,
+            //    request.CodigoSeguranca, request.Valor, request.Status);
 
             await _unitOfWork.PaymentRepository.InsertAsync(payment);
             await _unitOfWork.CommitAsync();

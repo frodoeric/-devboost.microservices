@@ -11,7 +11,7 @@ namespace Repository.Pay.Data
 
         public async Task<int> SaveChangesAsync()
         {
-            return await SaveChangesAsync();
+            return await base.SaveChangesAsync();
         }
 
         public new DbSet<T> Set<T>() where T : Entity
