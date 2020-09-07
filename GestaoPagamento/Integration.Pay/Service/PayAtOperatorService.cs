@@ -1,11 +1,12 @@
-﻿using Integration.Pay.Queries;
+﻿using Integration.Pay.Dto;
+using Integration.Pay.Interfaces;
 using System.Threading.Tasks;
 
-namespace Integration.Pay.Handler
+namespace Integration.Pay.Service
 {
-    public class PayAtOperatorHandler
+    public class PayAtOperatorService : IPayAtOperatorService
     {
-        public async Task<QueryPatyOperatorResult> ValidadePayAtOperator(QueryPayOperatorRequest queryPayOperatorRequest)
+        public async Task<PatyOperatorResultDto> ValidadePayAtOperator(PayOperatorFilterDto payOperatorFilterDto)
         {
             //Todo: Implementar chamada a api
             //https://5f53af5ee5de110016d51ae5.mockapi.io/api/v1/CreditCardPayment
@@ -31,7 +32,7 @@ namespace Integration.Pay.Handler
             }
             */
 
-            return await Task.FromResult(new QueryPatyOperatorResult());
+            return await Task.FromResult(new PatyOperatorResultDto());
         }
     }
 }

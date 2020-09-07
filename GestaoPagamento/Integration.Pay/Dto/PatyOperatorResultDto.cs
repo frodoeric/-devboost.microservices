@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Integration.Pay.Queries
+namespace Integration.Pay.Dto
 {
-    public class QueryPatyOperatorResult
+    public class PatyOperatorResultDto
     {
         public int Id { get; set; }
         public int CreditCardPaymentId { get; set; }

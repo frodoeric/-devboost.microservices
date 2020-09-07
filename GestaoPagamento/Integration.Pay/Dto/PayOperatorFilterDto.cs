@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Integration.Pay.Queries
+namespace Integration.Pay.Dto
 {
-    public class QueryPayOperatorRequest
+    public class PayOperatorFilterDto
     {
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }

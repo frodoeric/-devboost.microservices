@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain.Pay\Domain.Pay.csproj" />
+    <ProjectReference Include="..\Integration.Pay\Integration.Pay.csproj" />
     <ProjectReference Include="..\Repository.Pay\Repository.Pay.csproj" />
   </ItemGroup>
 
