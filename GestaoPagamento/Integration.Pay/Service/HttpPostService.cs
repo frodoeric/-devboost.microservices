@@ -1,6 +1,5 @@
 ﻿using Integration.Pay.Dto;
 using System;
-using System.Net;
 using System.Net.Http;
 
 namespace Integration.Pay.Service
@@ -14,18 +13,11 @@ namespace Integration.Pay.Service
                 BaseAddress = new Uri(postMethodDto.Url)
             };
             var result = httpClient.PostAsync(postMethodDto.Method, postMethodDto.BodyRequest).Result;
-            if (result.StatusCode == HttpStatusCode.OK)
-                return new PostMethodResultDto
-                {
-                    StatusCode = result.StatusCode,
-                    ContentResult = result.Content.ReadAsStringAsync().Result
-                };
-            else
-                return new PostMethodResultDto
-                {
-                    StatusCode = result.StatusCode,
-                    ContentResult = "Problema na execução do método"
-                };
+            return new PostMethodResultDto
+            {
+                StatusCode = result.StatusCode,
+                ContentResult = result.Content.ReadAsStringAsync().Result
+            };
         }
     }
 }

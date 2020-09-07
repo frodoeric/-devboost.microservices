@@ -1,6 +1,8 @@
 ﻿using Integration.Pay.Dto;
 using Integration.Pay.Interfaces;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -10,7 +12,7 @@ namespace Integration.Pay.Service
 {
     public class PayAtOperatorService : IPayAtOperatorService
     {
-        public async Task<PatyOperatorResultDto> ValidadePayAtOperator(PayOperatorFilterDto payOperatorFilterDto)
+        public async Task<PayOperatorResultDto> ValidadePayAtOperator(PayOperatorFilterDto payOperatorFilterDto)
         {
             var jsonContent = new StringContent(JsonConvert.SerializeObject(payOperatorFilterDto), Encoding.UTF8, "application/json");
             var postRequest = new PostMethodRequestDto(
@@ -18,14 +20,11 @@ namespace Integration.Pay.Service
                 method: "CreditCardPayment",
                 bodyRequest: jsonContent
             );
-            var result = HttpPostService.HttpPost(postRequest);
-            if (result.StatusCode == HttpStatusCode.OK)
-            {
-
-            }
-                
-
-            return await Task.FromResult(new PatyOperatorResultDto());
+            var postResult = HttpPostService.HttpPost(postRequest);
+            var result = new List<PayOperatorResultDto>();
+            if (postResult.StatusCode == HttpStatusCode.Created)
+                result = JsonConvert.DeserializeObject<List<PayOperatorResultDto>>(postResult.ContentResult);
+            return await Task.FromResult(result.FirstOrDefault());
         }
     }
 }

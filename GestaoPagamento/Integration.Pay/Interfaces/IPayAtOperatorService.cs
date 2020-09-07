@@ -5,6 +5,6 @@ namespace Integration.Pay.Interfaces
 {
     public interface IPayAtOperatorService
     {
-        Task<PatyOperatorResultDto> ValidadePayAtOperator(PayOperatorFilterDto payOperatorFilterDto);
+        Task<PayOperatorResultDto> ValidadePayAtOperator(PayOperatorFilterDto payOperatorFilterDto);
     }
 }
