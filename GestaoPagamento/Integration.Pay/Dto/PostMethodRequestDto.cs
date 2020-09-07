@@ -2,7 +2,7 @@
 
 namespace Integration.Pay.Dto
 {
-    public class PostMethodDto
+    public class PostMethodRequestDto
     {
         public string Url { get; set; }
         public string Method { get; set; }

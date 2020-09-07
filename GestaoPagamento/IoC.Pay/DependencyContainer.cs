@@ -3,6 +3,8 @@ using Domain.Pay.Services.CommandHandlers;
 using Domain.Pay.Services.CommandHandlers.Interfaces;
 using Domain.Pay.Services.QueryHandler;
 using Domain.Pay.Services.QueryHandler.Interfaces;
+using Integration.Pay.Interfaces;
+using Integration.Pay.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +32,9 @@ namespace IoC.Pay
 
             services.AddScoped<ICriarPaymentHandler, CriarPaymentHandler>();
             services.AddScoped<IListarPaymentsHandler, ListarPaymentsHandler>();
+
+            services.AddScoped<IWebHook, WebHook>();
+            services.AddScoped<IPayAtOperatorService, PayAtOperatorService>();
         }
     }
 }

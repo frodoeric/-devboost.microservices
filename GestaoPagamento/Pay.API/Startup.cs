@@ -1,3 +1,4 @@
+using devboost.dronedelivery.Config;
 using IoC.Pay;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +22,8 @@ namespace Pay.API
         {
             services.RegisterServices(Configuration);
             services.AddControllers();
+            //Registra o Swagger gerador, definindo 1 ou mais Swaggers documentos
+            services.AddSwaggerconfiguration(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,6 +33,8 @@ namespace Pay.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwaggerConfiguration(Configuration);
 
             app.UseHttpsRedirection();
 

@@ -47,7 +47,7 @@ namespace Domain.Pay.Services.CommandHandlers
 
 
             // Retorna para API cadastrada como WebHook
-            await _webHook.CallPostMethod(new PostMethodDto());
+            await _webHook.CallPostMethod(new PostMethodRequestDto());
 
             return _response;
         }

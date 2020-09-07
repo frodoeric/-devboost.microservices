@@ -5,6 +5,6 @@ namespace Integration.Pay.Interfaces
 {
     public interface IWebHook
     {
-        Task<string> CallPostMethod(PostMethodDto postMethodDto);
+        Task<string> CallPostMethod(PostMethodRequestDto postMethodDto);
     }
 }
