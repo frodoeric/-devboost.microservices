@@ -30,6 +30,7 @@ namespace devboost.Domain.Handles.Commands
                 return result;
 
             }
+
             catch (Exception ex)
             {
 
