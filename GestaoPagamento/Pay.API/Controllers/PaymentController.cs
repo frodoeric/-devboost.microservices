@@ -25,7 +25,7 @@ namespace Pay.API.Controllers
 
         [HttpPost]
         [Route("Pagamento")]
-        public async Task<IActionResult> Payment(CriarPaymentCommand criarPaymentCommand)
+        public async Task<IActionResult> Payment([FromBody]CriarPaymentCommand criarPaymentCommand)
         {
             var result = await _criarPaymentHandler.Handle(criarPaymentCommand);
             return Ok(result);
