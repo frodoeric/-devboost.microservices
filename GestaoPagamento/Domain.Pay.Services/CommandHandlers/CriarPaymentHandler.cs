@@ -7,6 +7,7 @@ using Domain.Pay.Services.Commands.Payments;
 using Integration.Pay.Dto;
 using Integration.Pay.Interfaces;
 using Repository.Pay.UnitOfWork;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,7 +39,11 @@ namespace Domain.Pay.Services.CommandHandlers
             }
 
             // Armazena informação da transação de pagamento
-            var payment = _mapper.Map<Payment>(request);
+            //var payment = _mapper.Map<Payment>(request);
+
+            Payment payment = new Payment(request.PayId, DateTime.Now, request.Name, request.Bandeira, request.NumeroCartao, request.Vencimento,
+                request.CodigoSeguranca, request.Valor, request.Status);
+
             await _unitOfWork.PaymentRepository.InsertAsync(payment);
             await _unitOfWork.CommitAsync();
 

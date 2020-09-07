@@ -23,9 +23,9 @@ namespace Domain.Pay.Entities
 
         public int Status { get; }
 
-        protected Payment() { }
+        public Payment() { }
 
-        private Payment(Guid payId, DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
+        public Payment(Guid payId, DateTime createdAt, string name, string bandeira, string numeroCartao, DateTime vencimento, int codigoSeguranca, double valor, int status)
         {
             PayId = payId;
             CreatedAt = createdAt;

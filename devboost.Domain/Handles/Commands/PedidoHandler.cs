@@ -55,8 +55,25 @@ namespace devboost.Domain.Handles.Commands
             await _pedidoRepository.AddPedido(pedido);
             //Todo: Montar Envio para EndPoint API Pagamento
 
-            // _payAPIHandler.PostRealizarPagamento(pagamento);
+            var pagamentoREquest = new CmmPagRequest()
+            {
+                Bandeira = pagamento.Bandeira,
+                CodigoSeguranca = pagamento.CodigoSeguranca,
+                CreatedAt = DateTime.Now,
+                Name = pedido.Cliente.Nome,
+                NumeroCartao = pagamento.Numero,
+                PayId = pagamento.Id,
+                Status = StatusCartao.aguardandoAprovacao,
+                Valor = pagamento.Valor,
+                Vencimento = pagamento.Vencimento
+            };
 
+            // _payAPIHandler.PostRealizarPagamento(pagamento);
+            var result = await _payAPIHandler.PostRealizarPagamento(pagamentoREquest);
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new Exception("Falha ao realizar o pagamento");
+            }
 
             return pedido;
         }
