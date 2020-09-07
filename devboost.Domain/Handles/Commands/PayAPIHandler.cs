@@ -24,7 +24,7 @@ namespace devboost.Domain.Handles.Commands
         {
             try
             {
-                StringContent pedidoJson = new StringContent(JsonConvert.SerializeObject(pagamento));
+                StringContent pedidoJson = new StringContent(JsonConvert.SerializeObject(pagamento), Encoding.UTF8, "application/json");
 
                 var result = await httpClient.PostAsync(uri, pedidoJson);
                 return result;

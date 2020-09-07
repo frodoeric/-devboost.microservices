@@ -45,7 +45,7 @@ namespace devboost.Test.Domain.Handles.Command
             };
 
 
-            var result = this.payAPIHandler.PostRealizarPagamento(cmmPagRequest);
+            var result = this.payAPIHandler.PostRealizarPagamento(cmmPagRequest).Result;
 
             Assert.NotNull(result);
         }
