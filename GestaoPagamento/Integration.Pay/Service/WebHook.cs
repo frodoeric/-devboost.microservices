@@ -9,6 +9,11 @@ namespace Integration.Pay.Service
     {
         public async Task<string> CallPostMethod(PostMethodRequestDto postMethodDto)
         {
+            //var result = HttpPostService.HttpPost(postRequest);
+            //if (result.StatusCode == HttpStatusCode.OK)
+            //{
+
+            //}
             throw new NotImplementedException();
         }
     }

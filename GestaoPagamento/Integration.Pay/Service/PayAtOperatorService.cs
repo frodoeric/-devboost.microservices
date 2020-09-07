@@ -1,38 +1,30 @@
 ﻿using Integration.Pay.Dto;
 using Integration.Pay.Interfaces;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Integration.Pay.Service
 {
     public class PayAtOperatorService : IPayAtOperatorService
     {
-        public async Task<PatyOperatorResultDto> ValidadePayAtOperator(PayOperatorFilterDto payOperatorFilterDto)
+        public async Task<PayOperatorResultDto> ValidadePayAtOperator(PayOperatorFilterDto payOperatorFilterDto)
         {
-            //Todo: Implementar chamada a api
-            //https://5f53af5ee5de110016d51ae5.mockapi.io/api/v1/CreditCardPayment
-
-            /*
-            using var httpClient = GetHttClient();
-            httpClient.BaseAddress = new Uri(_uri);
-            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_token}");
-            var httpResponse = await httpClient.GetAsync($"{_method}{querySERPROFilter.CNPJ}");
-            if (httpResponse.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                return (httpResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                    ? new QuerySERPROResult { Message = $"Token SERPRO inválido para essa operação. '{_token}'", TokenIsValid = false }
-                    : new QuerySERPROResult { Message = $"Nenhum dado encontrado para o filtro: {querySERPROFilter.CNPJ}" };
-            }
-            else
-            {
-                var responseAsString = await httpResponse.Content.ReadAsStringAsync();
-                var querySERPROResult = JsonSerializer.Deserialize<QuerySERPROResult>(responseAsString);
-                querySERPROResult.RecordFound = true;
-                querySERPROResult.Message = null;
-                return querySERPROResult;
-            }
-            */
-
-            return await Task.FromResult(new PatyOperatorResultDto());
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(payOperatorFilterDto), Encoding.UTF8, "application/json");
+            var postRequest = new PostMethodRequestDto(
+                url: "https://5f53af5ee5de110016d51ae5.mockapi.io/api/v1/",
+                method: "CreditCardPayment",
+                bodyRequest: jsonContent
+            );
+            var postResult = HttpPostService.HttpPost(postRequest);
+            var result = new List<PayOperatorResultDto>();
+            if (postResult.StatusCode == HttpStatusCode.Created)
+                result = JsonConvert.DeserializeObject<List<PayOperatorResultDto>>(postResult.ContentResult);
+            return await Task.FromResult(result.FirstOrDefault());
         }
     }
 }

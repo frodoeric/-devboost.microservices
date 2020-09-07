@@ -4,8 +4,15 @@ namespace Integration.Pay.Dto
 {
     public class PostMethodRequestDto
     {
-        public string Url { get; set; }
-        public string Method { get; set; }
-        public HttpContent BodyRequest { get; set; }
+        public PostMethodRequestDto(string url, string method, HttpContent bodyRequest)
+        {
+            Url = url;
+            Method = method;
+            BodyRequest = bodyRequest;
+        }
+
+        public string Url { get; private set; }
+        public string Method { get; private set; }
+        public HttpContent BodyRequest { get; private set; }
     }
 }
