@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Repository.Pay;
 using Repository.Pay.Data;
 using Repository.Pay.UnitOfWork;
+using System;
 using System.Reflection;
 
 namespace IoC.Pay
@@ -19,7 +20,7 @@ namespace IoC.Pay
     {
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddDbContext<PaymentDbContext>(options =>
                     options.UseSqlServer(
