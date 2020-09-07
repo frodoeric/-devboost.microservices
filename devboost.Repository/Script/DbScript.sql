@@ -36,6 +36,9 @@ IF OBJECT_ID('Usuario') IS NOT NULL
     DROP TABLE [Usuario]
 GO
 
+IF OBJECT_ID('Payment') IS NOT NULL
+    DROP TABLE [Usuario]
+GO
 
 -- Cria as tabelas novamente
 ------------------------------------------------------------------------------------------------
