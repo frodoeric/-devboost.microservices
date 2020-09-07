@@ -9,14 +9,16 @@ namespace Integration.Pay.Service
     {
         public static PostMethodResultDto HttpPost(PostMethodRequestDto postMethodDto)
         {
-            using var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(postMethodDto.Url);
+            using var httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(postMethodDto.Url)
+            };
             var result = httpClient.PostAsync(postMethodDto.Method, postMethodDto.BodyRequest).Result;
             if (result.StatusCode == HttpStatusCode.OK)
                 return new PostMethodResultDto
                 {
                     StatusCode = result.StatusCode,
-                    ContentResult = ""
+                    ContentResult = result.Content.ReadAsStringAsync().Result
                 };
             else
                 return new PostMethodResultDto
