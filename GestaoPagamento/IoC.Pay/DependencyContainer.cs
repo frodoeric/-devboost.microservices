@@ -17,13 +17,22 @@ namespace IoC.Pay
 {
     public static class DependencyContainer
     {
-        public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
+        public static void RegisterDbContextSQLServer(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             services.AddDbContext<PaymentDbContext>(options =>
                     options.UseSqlServer(
                     configuration.GetConnectionString("DefaultConnection")));
+        }
+
+        public static void RegisterDbContextInMemory(this IServiceCollection services)
+        {
+            services.AddDbContext<PaymentDbContext>(options =>
+                options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()));
+        }
+
+        public static void RegisterServices(this IServiceCollection services)
+        {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddDbContext<IPaymentDbContext, PaymentDbContext>(ServiceLifetime.Scoped);
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));

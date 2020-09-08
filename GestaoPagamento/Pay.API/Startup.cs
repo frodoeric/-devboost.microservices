@@ -20,9 +20,9 @@ namespace Pay.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.RegisterServices(Configuration);
+            services.RegisterDbContextSQLServer(Configuration);
+            services.RegisterServices();
             services.AddControllers();
-            //Registra o Swagger gerador, definindo 1 ou mais Swaggers documentos
             services.AddSwaggerconfiguration(Configuration);
         }
 
