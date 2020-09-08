@@ -7,9 +7,11 @@
   <ItemGroup>
     <Folder Include="Command\" />
     <Folder Include="Controller\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="xunit.assert" Version="2.4.1" />
     <PackageReference Include="xunit.core" Version="2.4.1" />
@@ -20,7 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Domain.Pay.Services\Domain.Pay.Services.csproj" />
+    <ProjectReference Include="..\Domain.Pay\Domain.Pay.csproj" />
     <ProjectReference Include="..\Integration.Pay\Integration.Pay.csproj" />
+    <ProjectReference Include="..\IoC.Pay\IoC.Pay.csproj" />
+    <ProjectReference Include="..\Repository.Pay\Repository.Pay.csproj" />
   </ItemGroup>
 
 </Project>
