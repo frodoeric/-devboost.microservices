@@ -11,13 +11,11 @@ namespace Tests.Pay.TDD.Repository
         public CriarPaymentHandlerTest()
         {
 
-        }
 
-
-
-       
+        }      
 
 
 
     }
 }
+
