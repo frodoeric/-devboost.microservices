@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="Command\" />
     <Folder Include="Controller\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
 
   <ItemGroup>
