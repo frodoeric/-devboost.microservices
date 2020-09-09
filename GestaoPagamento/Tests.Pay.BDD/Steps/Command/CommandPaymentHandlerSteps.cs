@@ -1,4 +1,6 @@
-﻿using TechTalk.SpecFlow;
+﻿using Domain.Pay.Services.CommandHandlers.Interfaces;
+using Domain.Pay.Services.Commands.Payments;
+using TechTalk.SpecFlow;
 using Tests.Pay.TDD.Config;
 
 namespace Tests.Pay.BDD.Steps.Command
@@ -6,31 +8,23 @@ namespace Tests.Pay.BDD.Steps.Command
     [Binding]
     public class CommandPaymentHandlerSteps
     {
-        private readonly ScenarioContext _scenarioContext;
-        private StartInjection _startInjection;
+        readonly ScenarioContext _context;
+        readonly ICriarPaymentHandler _criarPaymentHandler;
 
-        public CommandPaymentHandlerSteps(ScenarioContext scenarioContext, StartInjection startInjection)
+        public CommandPaymentHandlerSteps(ScenarioContext context, ICriarPaymentHandler criarPaymentHandler)
         {
-            _scenarioContext = scenarioContext;
-            _startInjection = StartInjection
+            var _serviceProvider = new StartInjection().ServiceProvider;
+            _context = context;
+            _criarPaymentHandler = criarPaymentHandler;
         }
 
-        [Given(@"Exista Payments cadastrados")]
-        public void GivenExistaPaymentsCadastrados()
+        [Given(@"Nao Exista Payments cadastrados")]
+        public void GivenNaoExistaPaymentsCadastrados()
         {
-            
-        }
-        
-        [When(@"Consultar Pagamentos")]
-        public void WhenConsultarPagamentos()
-        {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Then(@"Cadastrar pagamentos")]
-        public void ThenCadastrarPagamentos()
-        {
-            ScenarioContext.Current.Pending();
+            _criarPaymentHandler.Handle(new CriarPaymentCommand 
+            {
+
+            });
         }
     }
 }
