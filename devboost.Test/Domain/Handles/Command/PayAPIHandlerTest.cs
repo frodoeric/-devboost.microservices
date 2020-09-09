@@ -20,17 +20,14 @@ namespace devboost.Test.Domain.Handles.Command
 
         public PayAPIHandlerTest()
         {
-            //this.payAPIHandler = new PayAPIHandler(httpClient);
-            this.httpClient = new HttpClient();
-
             var _serviceProvider = new StartInjection().ServiceProvider;
-            this.payAPIHandler = _serviceProvider.GetService<IPayAPIHandler>();
+            httpClient = new HttpClient();
+            payAPIHandler = _serviceProvider.GetService<IPayAPIHandler>();
         }
 
         [Fact]
         public void ReazliarPagamentoSucesso()
         {
-
             CmmPagRequest cmmPagRequest = new CmmPagRequest()
             {
                 Bandeira = "visa",
@@ -43,11 +40,8 @@ namespace devboost.Test.Domain.Handles.Command
                 Valor = 321,
                 Vencimento = DateTime.Now
             };
-
-
-            var result = this.payAPIHandler.PostRealizarPagamento(cmmPagRequest).Result;
-
-            Assert.NotNull(result);
+            var result = payAPIHandler.PostRealizarPagamento(cmmPagRequest).Result;
+            Assert.Equal(result.StatusCode, System.Net.HttpStatusCode.OK);
         }
     }
 }

@@ -5,8 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Command\" />
-    <Folder Include="Controller\" />
+    <Compile Remove="Command\**" />
+    <Compile Remove="Controller\**" />
+    <EmbeddedResource Remove="Command\**" />
+    <EmbeddedResource Remove="Controller\**" />
+    <None Remove="Command\**" />
+    <None Remove="Controller\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Repository\" />
   </ItemGroup>
 

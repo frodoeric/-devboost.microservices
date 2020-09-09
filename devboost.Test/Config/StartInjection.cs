@@ -5,6 +5,7 @@ using devboost.Domain.Handles.Queries.Interfaces;
 using devboost.Domain.Repository;
 using devboost.Repository;
 using devboost.Repository.Context;
+using devboost.Test.Mock;
 using devboost.Test.Warmup;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -37,20 +38,15 @@ namespace devboost.Test.Config
             _services.AddScoped<IUserRepository, UserRepository>();
             _services.AddScoped<IClienteRepository, ClienteRepository>();
             _services.AddScoped<IPagamentoRepository, PagamentoCartaoRepository>();
-            _services.AddScoped<IPayAPIHandler, PayAPIHandler>();
-
+            _services.AddScoped<IPayAPIHandler, PayAPIHandlerMock>();
             _services.AddScoped<ITokenHandler, TokenHandler>();
             _services.AddScoped<ILoginHandler, LoginHandler>();
             _services.AddScoped<IUserHandler, UserHandler>();
             _services.AddScoped<IClienteHandler, ClienteHandler>();
             _services.AddScoped<IClientQueryHandler, ClienteQueryHandler>();
-
             _services.AddScoped<IPedidoHandler, PedidoHandler>();
             _services.AddScoped<IDroneHandler, DroneHandler>();
-
             _services.AddScoped<IDataStart, DataStart>();
-
-            _services.AddHttpClient<IPayAPIHandler, PayAPIHandler>();
 
             // Constroe o Provider
             ServiceProvider = _services.BuildServiceProvider();
