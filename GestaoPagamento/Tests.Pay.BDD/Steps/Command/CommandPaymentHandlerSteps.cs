@@ -1,4 +1,5 @@
-﻿using Domain.Pay.Services.CommandHandlers.Interfaces;
+﻿using Domain.Pay.Entities;
+using Domain.Pay.Services.CommandHandlers.Interfaces;
 using Domain.Pay.Services.Commands.Payments;
 using Domain.Pay.Services.Queries.Payments;
 using Domain.Pay.Services.QueryHandler.Interfaces;
@@ -7,6 +8,7 @@ using System;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using Tests.Pay.TDD.Config;
+using Xunit;
 
 namespace Tests.Pay.BDD.Steps.Command
 {
@@ -46,6 +48,7 @@ namespace Tests.Pay.BDD.Steps.Command
             var payment = await _listarPaymentsHandler.Handle(new PaymentsQuery());
 
             _context.Set(payment);
+            Assert.NotNull(_context.Get<Payment>());
         }
     }
 }
