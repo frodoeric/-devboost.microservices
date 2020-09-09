@@ -25,4 +25,9 @@
     <Folder Include="Hooks\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Pay.Services\Domain.Pay.Services.csproj" />
+    <ProjectReference Include="..\Tests.Pay.TDD\Tests.Pay.TDD.csproj" />
+  </ItemGroup>
+
 </Project>
