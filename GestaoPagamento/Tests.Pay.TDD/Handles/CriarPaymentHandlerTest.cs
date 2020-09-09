@@ -26,8 +26,11 @@ namespace Tests.Pay.TDD.Repository
         {
             var payCommand = new CriarPaymentCommand(new Guid(),DateTime.Now,"Afonso","Visa","1234567891011115",DateTime.Now.AddMonths(9),32,8523,1);
 
+            payCommand.Validar();
+
             var result = _criarPaymentHandler.Handle(payCommand).Result;
 
+            
             Assert.False(result.HasFails);
 
             
