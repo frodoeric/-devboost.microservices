@@ -46,9 +46,7 @@ namespace Tests.Pay.BDD.Steps.Command
 
             await _criarPaymentHandler.Handle(criarPayment);
             var payment = await _listarPaymentsHandler.Handle(new PaymentsQuery());
-
-            _context.Set(payment);
-            Assert.NotNull(_context.Get<Payment>());
+            Assert.NotNull(payment);
         }
     }
 }

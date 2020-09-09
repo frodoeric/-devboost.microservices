@@ -8,6 +8,7 @@ using Integration.Pay.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pay.Mock.Infra;
 using Repository.Pay;
 using Repository.Pay.Data;
 using Repository.Pay.UnitOfWork;
@@ -30,20 +31,21 @@ namespace IoC.Pay
                 options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()));
         }
 
-        public static void RegisterServices(this IServiceCollection services)
+        public static void RegisterServices(this IServiceCollection services, bool mock = false)
         {
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             services.AddDbContext<IPaymentDbContext, PaymentDbContext>(ServiceLifetime.Scoped);
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             services.AddScoped<ICriarPaymentHandler, CriarPaymentHandler>();
             services.AddScoped<IListarPaymentsHandler, ListarPaymentsHandler>();
-
-            services.AddScoped<IWebHook, WebHook>();
             services.AddScoped<IPayAtOperatorService, PayAtOperatorService>();
+
+            if (!mock)
+                services.AddScoped<IWebHook, WebHook>();
+            else
+                services.AddScoped<IWebHook, WebHookMock>();
+
         }
     }
 }

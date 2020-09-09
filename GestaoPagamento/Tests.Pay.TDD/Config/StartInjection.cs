@@ -17,7 +17,7 @@ namespace Tests.Pay.TDD.Config
         {
             var _services = new ServiceCollection();
             _services.RegisterDbContextInMemory();
-            _services.RegisterServices();
+            _services.RegisterServices(true);
 
             ServiceProvider = _services.BuildServiceProvider();
         }
