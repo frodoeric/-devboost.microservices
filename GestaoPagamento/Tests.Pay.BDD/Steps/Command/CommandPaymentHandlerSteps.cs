@@ -4,6 +4,7 @@ using Domain.Pay.Services.Queries.Payments;
 using Domain.Pay.Services.QueryHandler.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 using Tests.Pay.TDD.Config;
 
@@ -26,7 +27,7 @@ namespace Tests.Pay.BDD.Steps.Command
         }
 
         [Given(@"Nao Exista Payments cadastrados")]
-        public void GivenNaoExistaPaymentsCadastrados()
+        public async Task GivenNaoExistaPaymentsCadastrados()
         {
             CriarPaymentCommand criarPayment = new CriarPaymentCommand
             {
@@ -41,8 +42,8 @@ namespace Tests.Pay.BDD.Steps.Command
                 Status = 1
             };
 
-            _criarPaymentHandler.Handle(criarPayment);
-            var payment = _listarPaymentsHandler.Handle(new PaymentsQuery());
+            await _criarPaymentHandler.Handle(criarPayment);
+            var payment = await _listarPaymentsHandler.Handle(new PaymentsQuery());
 
             _context.Set(payment);
         }
