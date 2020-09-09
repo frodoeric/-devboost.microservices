@@ -27,7 +27,7 @@ namespace devboost.Domain.Handles.Commands
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
