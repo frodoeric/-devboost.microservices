@@ -30,9 +30,11 @@ namespace devboost.Domain.Handles.Commands
 
         public async Task<Pedido> RealizarPedido(RealizarPedidoRequest pedidoRequest, string userName)
         {
+            // Encontra cliente pelo Usuário Logado (Token)
             var cliente = await _clienteRepository.GetByUserName(userName);
             if (cliente == null)
                 throw new Exception("Cliente não localizado");
+            // Cálcula a distância para o pedido
             var distancia = GEOCalculaDistancia.CalculaDistanciaEmKM(new GEOParams(LATITUDE, LONGITUDE, cliente.Latitude, cliente.Longitude));
             var pagamento = new PagamentoCartao(
                 pedidoRequest.Bandeira,
@@ -42,6 +44,7 @@ namespace devboost.Domain.Handles.Commands
                 pedidoRequest.Valor,
                 StatusCartao.aguardandoAprovacao
             );
+            // Salva o pedido na base
             var pedido = new Pedido
             {
                 Id = Guid.NewGuid(),
@@ -53,8 +56,7 @@ namespace devboost.Domain.Handles.Commands
                 PagamentoCartao = pagamento
             };
             await _pedidoRepository.AddPedido(pedido);
-            //Todo: Montar Envio para EndPoint API Pagamento
-
+            // Envia o pedido para Pagamento
             var pagamentoREquest = new CmmPagRequest()
             {
                 Bandeira = pagamento.Bandeira,
@@ -67,14 +69,9 @@ namespace devboost.Domain.Handles.Commands
                 Valor = pagamento.Valor,
                 Vencimento = pagamento.Vencimento
             };
-
-            // _payAPIHandler.PostRealizarPagamento(pagamento);
             var result = await _payAPIHandler.PostRealizarPagamento(pagamentoREquest);
             if (!result.IsSuccessStatusCode)
-            {
                 throw new Exception("Falha ao realizar o pagamento");
-            }
-
             return pedido;
         }
 
